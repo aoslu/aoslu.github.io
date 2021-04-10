@@ -1,0 +1,65 @@
+{%extends 'base.html'%}{%load static%} {%load crispy_forms_tags%} {%block dropdown%}{%endblock%} {%block slider_section%}{%endblock%}{%block contact%}{%endblock%}{%block about%} {%endblock%} {%block clients%}{%endblock%} {%block brand%}
+
+<!-- contact -->
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Bize Ulaş</h2>
+                </div>
+                <form class="main_form" action="{%url 'anasayfa'%}" method="POST">
+                    {%csrf_token%} {{form | crispy}}
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <button class="send">Gönder</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end contact -->
+{%endblock%}
+<!-- footer -->
+{%block footer%}
+<footer>
+    <div id="contact" class="footer">
+        <div class="container">
+            <div class="row pdn-top-30">
+                <div class="col-md-12 ">
+                    <div class="footer-box">
+                        <div class="headinga">
+                            <h3>Address</h3>
+                            <span>Healing Center, 176 W Streetname,New York, NY 10014, US</span>
+                            <p>(+71) 8522369417
+                                <br>demo@gmail.com</p>
+                        </div>
+                        <ul class="location_icon">
+                            <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                            <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                        <div class="menu-bottom">
+                            <ul class="link">
+                                <li> <a href="{%url 'anasayfa'%}">Anasayfa</a></li>
+                                <li> <a href="{%url 'about'%}">Hakkımızda</a></li>
+                                <li> <a href="{%url 'brand'%}">Marka</a></li>
+                                <li> <a href="{%url 'special'%}">Kat.</a></li>
+                                <li> <a href="{%url 'contact'%}">Bize Ulaşın</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>© 2019 All Rights Reserved. Design By<a href="https://html.design/"> Free Html Templates</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{%endblock%}

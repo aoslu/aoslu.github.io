@@ -1,0 +1,213 @@
+{%extends 'base.html'%}{%load static%}{%load crispy_forms_tags%}
+<!-- brand -->
+{%block brand%}
+<div class="brand">
+    <div class="brand-bg">
+        <div class="container">
+            <center>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="titlepage">
+                                <h2>Vitrinde ki İlanlar</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </center>
+            <div class="row">
+                {%for urun in urunler%}
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
+                    <div class="brand_box">
+                        {%if urunler.foto_ekle%}
+                        <img src="{{ urun.foto_ekle.url }}" alt="img" /> {% endif %}
+                        <img src="{{ urun.foto_ekle.url }}" alt="img" />
+                        <h3>₺<strong class="red">{{urun.fiyat_ekle}}/Ay</strong></h3>
+                        <span>{{urun.baslik}}</span>
+                        <span>{{urun.aciklama | safe | truncatechars_html:28}}</span>
+                        <span>{{urun.olusturulma_tarihi|timesince}} önce paylaşıldı...</span>
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <a class="read-more " href="{%url 'detay'%} ">İncele</a>
+                            </div>
+                            <div class="col-md-6 ">
+                                <a class="read-more" href="{%url 'mesaj'%}">İletişime Geç</a>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+                <br> <br> <br>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        {%if urunler.has_previous%}
+                        <li class="page-item">
+                            <a class="page-link" href="?sayfa={{urunler.previous_page_number}}" tabindex="-1">Önceki Sayfa</a>
+                        </li>{%else%}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Önce ki</a>
+                        </li> {%endif%}
+                        <li class="page-item"><a class="page-link" href="#">{{urunler.number}}</a></li>
+                        {% if urunler.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?sayfa={{urunler.next_page_number}}">Sonra ki</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?sayfa={{urunler.paginator.num_pages}}">Son Sayfa</a>
+                        </li>
+                        {%else%} {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+    <!-- end brand -->
+    <!-- clients -->
+    {%block clients%}
+    <center>
+        <div class="clients">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titlepage">
+                            <h2>Müşteriler Neler Diyor...</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+    <div class="clients_red">
+        <div class="container">
+            <div id="testimonial_slider" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#testimonial_slider" data-slide-to="0" class=""></li>
+                    <li data-target="#testimonial_slider" data-slide-to="1" class="active"></li>
+                    <li data-target="#testimonial_slider" data-slide-to="2" class=""></li>
+                </ul>
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <div class="testomonial_section">
+                            <div class="full center">
+                            </div>
+                            <div class="full testimonial_cont text_align_center cross_layout">
+                                <div class="cross_inner">
+                                    <h3>Akın Oslu<br><strong class="ornage_color">Yazılımcı, Girişimci</strong></h3>
+                                    <p>Kargo Elime Ulaştıktan sonra 3 ay boyunca oyuncak arabayı kiraladım ve yüksek paralar harcamak zorunda kalmadım. Gayet iyi sarılmıştı ve temizlenmişti.</i>
+                                    </p>
+                                    <div class="full text_align_center margin_top_30">
+                                        <img src="{% static 'ev/assets/icon/testimonial_qoute.png'%}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item active">
+                        <div class="testomonial_section">
+                            <div class="full center">
+                            </div>
+                            <div class="full testimonial_cont text_align_center cross_layout">
+                                <div class="cross_inner">
+                                    <h3>Akın Oslu<br><strong class="ornage_color">Yazılımcı, Girişimci</strong></h3>
+                                    <p>Kargo Elime Ulaştıktan sonra 3 ay boyunca oyuncak arabayı kiraladım ve yüksek paralar harcamak zorunda kalmadım. Gayet iyi sarılmıştı ve temizlenmişti.</i>
+                                    </p>
+                                    <div class="full text_align_center margin_top_30">
+                                        <img src="{% static 'ev/assets/icon/testimonial_qoute.png'%}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testomonial_section">
+                            <div class="full center">
+                            </div>
+                            <div class="full testimonial_cont text_align_center cross_layout">
+                                <div class="cross_inner">
+                                    <h3>Akın Oslu<br><strong class="ornage_color">Yazılımcı, Girişimci</strong></h3>
+                                    <p>Kargo Elime Ulaştıktan sonra 3 ay boyunca oyuncak arabayı kiraladım ve yüksek paralar harcamak zorunda kalmadım. Gayet iyi sarılmıştı ve temizlenmişti.</i>
+                                    </p>
+                                    <div class="full text_align_center margin_top_30">
+                                        <img src="{% static 'ev/assets/icon/testimonial_qoute.png'%}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+    <!-- end clients -->
+    <!-- contact -->
+
+    <!-- end contact -->
+    <!-- footer -->
+    {%block footer%}
+    <footer>
+        <div id="contact" class="footer">
+            <div class="container ">
+                <div class="row pdn-top-30">
+                    <div class="col-md-12">
+                        <div class="footer-box">
+                            <div class="headinga">
+                                <h3>Adres</h3>
+                                <span>İzmit Merkez, Bakarsan Görürsüüüüün</span>
+                                <p>05427867537
+                                    <br>aknoslu3541@gmail.com</p>
+                            </div>
+                            <ul class="location_icon">
+                                <li> <a href="# "><i class="fa fa-facebook-f "></i></a></li>
+                                <li> <a href="# "><i class="fa fa-twitter"></i></a></li>
+                                <li> <a href="# "><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                            <div class="menu-bottom">
+                                <ul class="link">
+                                    <li> <a href="{%url 'anasayfa'%}">Anasayfa</a></li>
+                                    <li> <a href="{%url 'about'%}">Hakkımızda</a></li>
+                                    <li> <a href="{%url 'brand'%}">Marka</a></li>
+                                    <li> <a href="{%url 'special'%}">Kat.</a></li>
+                                    <li> <a href="{%url 'contact'%}">Bize Ulaşın</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p>Düzenlendi<a href="https://www.2youtech.com/ "> 2youtech</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {%endblock%}
+    <!-- end footer -->
+    {%block contact%}
+    <!-- contact -->
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Bize Ulaş</h2>
+                    </div>
+                    <form class="main_form" action="{%url 'anasayfa'%}" method="POST">
+                        {%csrf_token%} {{form | crispy}}
+                        <div class="row">
+                            <div class=" col-md-12">
+                                <button class="send">Gönder</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end contact -->
+    {%endblock%}

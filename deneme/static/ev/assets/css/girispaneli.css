@@ -1,0 +1,17 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#container {
+    opacity: 0.8;
+    font-family: 'Lexend Mega', sans-serif;
+    position: relative;
+    margin: auto;
+    transform: translate(260px, 100px);
+}
+
+.card {
+    width: 18rem;
+    margin: auto;
+}

@@ -1,0 +1,43 @@
+{%extends 'base.html'%} {%load static%} {%load crispy_forms_tags%}{%block slider_section%}
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <center>
+                    <div class="titlepage">
+                        <h2>Kayıt OL</h2>
+                    </div>
+                </center>
+                <form class="main_form" method="POST">
+                    {%csrf_token%}
+                    <div class="row">
+                        {%include 'components/messages.html'%} {{form | crispy}}
+                        <div class=" col-md-12">
+                            <button class="btn btn-danger">Kayıt OL</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+<!--end slider-section-->
+<!--dropdown-->
+{% block dropdown %} {%endblock%}
+<!--end dropdown-->
+<!-- brand -->
+{%block brand%} {%endblock%}
+<!-- end brand -->
+<!-- about -->
+{%block about%} {%endblock%}
+<!-- end about -->
+<!-- clients -->
+{% block clients %} {%endblock%}
+<!-- end clients -->
+<!-- contact -->
+{%block contact%} {%endblock%}
+<!-- end contact -->
+<!-- footer -->
+{%block footer%} {%endblock%}
+<!-- end footer -->

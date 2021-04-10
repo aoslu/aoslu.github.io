@@ -1,0 +1,67 @@
+{%extends 'base.html'%} {%load static%}{%block footer%}{%endblock%}{%block header%}
+<header>
+    <!-- header inner -->
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                    <div class="full">
+                        <div class="center-desk">
+                            <div class="logo">
+                                <a href="{%url 'anasayfa'%}"><img src="{% static 'ev/assets/images/toytoyy.png'%}" alt="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                    <div class="menu-area">
+                        <div class="limit-box">
+                            <nav class="main-menu">
+                                <ul class="menu-area-main">
+                                    <li class="active">
+                                        <a href="{%url 'anasayfa'%}">Anasayfa</a> </li>
+                                    <li><a href="{%url 'profil'%}">Profil</a></li>
+                                    <li><a href="{%url 'brand'%}">Bildirimler</a></li>
+                                    <li><a href="{%url 'about'%}">BizKimiz</a> </li>
+                                    <li><a href="{%url 'contact'%}">Bize Ulaşın</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header inner -->
+</header>
+{%endblock%} {%block dropdown%}{%endblock%}{%block about%} {% if request.user.is_authenticated %}<br> <br> <br> <br>
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <center>
+                    <div class="col-12">
+                        <a class="list-group-item list-group-item-action" href="{%url 'urun_ekle'%}">Ürün Ekle</a>
+                        <a class="list-group-item list-group-item-action" href="{%url 'profil_guncelle'%}">Profil Düzenle</a>
+                        <a class="list-group-item list-group-item-action" href="{%url 'sifredegistir'%}">Şifre Değiştir</a>
+                        <a class="list-group-item list-group-item-action" href="{%url 'cikis'%}">Çıkış</a>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+<center>
+    <div class="brand_color" style="font-size:large; ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2><a href="{%url 'giris'%}">{%if not request.user.is_authenticated%}Sisteme Giriş Yap{%else%}Profilim{%endif%}</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</center> {%endblock%} {%block brand%}{%endblock%} {%block contact%} {%endblock%} {%block clients%}{%endblock%} {%block slider_section%}{% endblock%}

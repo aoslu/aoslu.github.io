@@ -1,0 +1,58 @@
+{%load static%}
+
+<br><br><br>
+<center>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h1><strong>KATEGORİLERE GÖZ AT</strong></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+<center>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 co-sm-l2">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" ctype="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><h4>OYUNCAKLAR</h4></button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    {%for alt_kategori in alt_kategoriler%}
+                                    <div class=" col-md-4 ">
+                                        <a class="read-more" href="{%url 'detay'%}">{{alt_kategori.isim}}</a>
+                                    </div>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <center>
+                    <div class="container ">
+                        <div class="row ">
+                            <div class="col-md-12 ">
+                                <div class="titlepage ">
+                                    <h2 id="sasa">Ne Kiralamak İstersiniz...</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </center>
+                <!-- The form -->
+                <form action="{%url 'anasayfa'%}" class="example">
+                    <input type="text" placeholder="Search..." name="sorgu">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</center>
+<br><br>

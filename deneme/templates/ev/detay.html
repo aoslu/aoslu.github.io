@@ -1,0 +1,65 @@
+{% extends "base.html" %} {%load static%} {%block slider_section%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card" style="width:460px; height:230px;">
+                <img src="{%static 'ev/assets/images/abouuut.jpeg'%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Ürün Başlığı</h5>
+                    <p class="card-text">Ürün kısa açıklama</p>
+                    <hr>
+                    <a href="{%url 'sale'%}" class="btn btn-primary" style="width:142px;font-size:medium; height:36px;">
+                        <center>Satın Al</center>
+                    </a>
+                    <a href="{%url 'sale'%}" class="btn btn-success" style="width:142px;font-size:medium; height:36px;">Sepete Ekle</a>
+                    <span class="btn btn-primary" style="width:142px;font-size:medium; height:36px;">Stok Adedi: 6</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>
+                <div class="jumbotron">
+                    <h1 class="display-4">Hello, world!</h1>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4">
+                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    </p>
+                </div>
+            </h4>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+<!--dropdown-->
+{% block dropdown %} {%endblock%}
+<!--end dropdown-->
+<!-- brand -->
+{%block brand%} {%endblock%}
+<!-- end brand -->
+<!-- about -->
+{%block about%} {%endblock%}
+<!-- end about -->
+<!-- clients -->
+{% block clients %} {%endblock%}
+<!-- end clients -->
+<!-- contact -->
+{%block contact%} {%endblock%}
+<!-- end contact -->
+<!-- footer -->
+{%block footer%} {%endblock%}
+<!-- end footer -->

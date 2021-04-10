@@ -1,0 +1,23 @@
+{%extends 'base.html'%}{%load static%} {%block contact%} {%load crispy_forms_tags%}
+<!-- contact -->
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>TEMPLATEVİEWPAGE.</h2>
+                </div>
+                <form class="main_form" action="{%url 'contact'%}" method="POST">
+                    {%csrf_token%} {{form | crispy}}
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <button class="send">Gönder</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end contact -->
+{%endblock%} {%block about%} {%endblock%} {%block dropdown%} {%endblock%} {%block brand%}{%endblock%} {%block clients%}{%endblock%} {%block slider_section%}{% endblock%}
