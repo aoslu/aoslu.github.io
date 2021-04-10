@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect
-from deneme.models import AltKategoriModel, ProductModel
-from account.models import CustomUserModel
+from django.shortcuts import render, get_object_or_404
+from deneme.models import AltKategoriModel, ProductModel, YorumModel
 from django.core.paginator import Paginator
-from deneme.forms import MessageForm, CustomUserModelForm, ProductForm
+from deneme.forms import MessageForm, YorumModelForm
+# ProductForm,
 from django.db.models import Q
 from django.views.generic import CreateView
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-# Create your views here.
+
 
 def anasayfa(request):
     sorgu = request.GET.get('sorgu')
@@ -55,6 +55,11 @@ def contak(request):
         form = MessageForm()
     return render(request, "ev/contak.html", {'form':form})
 
+def detay(request):
+    yorumlar = YorumModel.objects.all()
+    yorum_ekle_form= YorumModelForm()
+    return render(request, "ev/detay.html", context={'yorumlar':yorumlar, 'yorum_ekle_form':yorum_ekle_form})
+
 def profil(request):
     return render(request, "ev/profil.html")
 
@@ -72,9 +77,6 @@ def special(request):
 
 def contact(request):
     return render(request, "ev/contact.html")
-
-def detay(request):
-    return render(request, "ev/detay.html")
 
 def sale(request):
     return render(request, "ev/sale.html")

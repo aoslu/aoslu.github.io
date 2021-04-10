@@ -33,17 +33,18 @@
     </div>
     <div class="col-md-12">
         <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <h1 class="display-4">Ürün Yorumları</h1>
+            <p class="lead">Yorumlarınız admin tarafından onaylanıp yayınlanır...</p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p>{%if request.user.is_authenticated%}{{yorum_ekle_form}}{%else%}
+                <p>'Yorum Yapmak İçin Lütfen Kaydolun veya Giriş Yapın'</p>
+                <a href="{%url 'kayit_formu'%}">Kayıt Ol veya</a> <a href="{%url 'giris'%}">Giriş Yap</a> {%endif%}</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Yorum Gönder</a>
             </p>
         </div>
     </div>
 </div>
-
 {%endblock%}
 <!--dropdown-->
 {% block dropdown %} {%endblock%}
