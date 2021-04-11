@@ -1,4 +1,4 @@
-{% extends "base.html" %} {%load static%} {%block slider_section%}
+{% extends "base.html" %} {%load static%}{%load crispy_forms_tags%} {%block slider_section%}
 
 <div class="container">
     <div class="row">
@@ -36,12 +36,11 @@
             <h1 class="display-4">Ürün Yorumları</h1>
             <p class="lead">Yorumlarınız admin tarafından onaylanıp yayınlanır...</p>
             <hr class="my-4">
-            <p>{%if request.user.is_authenticated%}{{yorum_ekle_form}}{%else%}
+            <p>{%if request.user.is_authenticated%}
+                <form action="POST"> {%csrf_token%} {{yorum_ekle_form|crispy}}
+                    <input type="button" class="btn btn-danger pt-3 pb-3" value="Yorum Yap"></form>{%else%}
                 <p>'Yorum Yapmak İçin Lütfen Kaydolun veya Giriş Yapın'</p>
-                <a href="{%url 'kayit_formu'%}">Kayıt Ol veya</a> <a href="{%url 'giris'%}">Giriş Yap</a> {%endif%}</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Yorum Gönder</a>
-            </p>
+                <a href="{%url 'kayit_formu'%}">Kayıt Ol veya</a> <a href="{%url 'giris'%}">Giriş Yap</a>{%endif%}</p>
         </div>
     </div>
 </div>

@@ -56,9 +56,15 @@ def contak(request):
     return render(request, "ev/contak.html", {'form':form})
 
 def detay(request):
-    yorumlar = YorumModel.objects.all()
-    yorum_ekle_form= YorumModelForm()
-    return render(request, "ev/detay.html", context={'yorumlar':yorumlar, 'yorum_ekle_form':yorum_ekle_form})
+    if request.method=='POST':
+        form= YorumModelForm(request.POST)
+        if form.is_valid():
+            yorum = form.save(commit=False)
+            yorum.yazar= request.user
+            yorum.save()
+    else:
+        form=YorumModelForm()
+    return render(request, "ev/detay.html", {'form':form})
 
 def profil(request):
     return render(request, "ev/profil.html")
