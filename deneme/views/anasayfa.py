@@ -1,13 +1,13 @@
-from django.shortcuts import render, get_object_or_404
-from deneme.models import AltKategoriModel, ProductModel, YorumModel
+from django.shortcuts import render #,get_object_or_404
+from deneme.models import AltKategoriModel, ProductModel #,YorumModel
 from django.core.paginator import Paginator
 from deneme.forms import MessageForm, YorumModelForm
 # ProductForm,
 from django.db.models import Q
 from django.views.generic import CreateView
 #from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def anasayfa(request):
     sorgu = request.GET.get('sorgu')
@@ -31,10 +31,12 @@ def anasayfa(request):
         form = MessageForm()
     return render(request, "ev/anasayfa.html", context={'alt_kategoriler':alt_kategoriler, 'urunler':paginator.get_page(sayfa), 'form':form})
 
-class UrunEkleCreateView(CreateView):
+class UrunEkleCreateView(LoginRequiredMixin, CreateView):
+    login_url=reverse_lazy('giris')
     template_name= 'ev/urun_ekle.html'
     model= ProductModel
     fields= ('baslik', 'foto_ekle', 'fiyat_ekle', 'aciklama')
+
     def get_success_url(self):
         return reverse('detay')
 

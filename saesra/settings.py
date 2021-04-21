@@ -9,9 +9,18 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
 from pathlib import Path
 import os
+import environ
+import secrets
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+environ.Env.read_env()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,10 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j82pl1uodepr=32@ydje)2d+h0!5y)fb3h2118@oc0gotutrzx'
-
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production!
+#env = environ.Env()
 
 ALLOWED_HOSTS = []
 
@@ -41,6 +50,7 @@ INSTALLED_APPS = [
     'account',
     'crispy_forms',
     'rest_framework',
+    'storages',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,3 +141,14 @@ MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL= '/anasayfa'
+
+AWS_ACCESS_KEY_ID= os.environ.get('SECRET_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY_ID= os.environ.get('ACCESS_KEY_ID')
+AWS_STORAGE_BUCKET_NAME= 'akinoslus3'
+AWS_S3_CUSTOM_DOMAİN= '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETRES= {
+    'CacheControls':'max-age=86400',
+}
+AWS_LOCATION = 'static'
+STATIC_URL= 'htpp://%s/%s/' % (AWS_S3_CUSTOM_DOMAİN, AWS_LOCATION)
+STATICFILES_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
