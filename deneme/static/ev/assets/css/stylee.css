@@ -1884,7 +1884,10 @@ ul.social_icon li a:hover {
 /** contact **/
 .contact {
     background: #ffffff;
-    padding: 90px 0px;
+    padding: 20px 0px;
+    font-size: 30px;
+    border-radius: 2px;
+    border-color: #505152;
 }
 .titlepage {
     padding-bottom: 60px;

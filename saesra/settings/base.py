@@ -9,33 +9,21 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-from pathlib import Path
 import os
-import environ
-import secrets
+from pathlib import Path
+from os import environ
 
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-environ.Env.read_env()
-
+env= environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = True
-# SECURITY WARNING: don't run with debug turned on in production!
-#env = environ.Env()
-
-ALLOWED_HOSTS = []
-
+SECRET_KEY =env('SECRET_KEY')
 
 # Application definition
 
@@ -50,7 +38,6 @@ INSTALLED_APPS = [
     'account',
     'crispy_forms',
     'rest_framework',
-    'storages',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,34 +70,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'saesra.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
 
 # Internationalization
 
@@ -141,14 +103,3 @@ MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL= '/anasayfa'
-
-AWS_ACCESS_KEY_ID= os.environ.get('SECRET_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY_ID= os.environ.get('ACCESS_KEY_ID')
-AWS_STORAGE_BUCKET_NAME= 'akinoslus3'
-AWS_S3_CUSTOM_DOMAİN= '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETRES= {
-    'CacheControls':'max-age=86400',
-}
-AWS_LOCATION = 'static'
-STATIC_URL= 'htpp://%s/%s/' % (AWS_S3_CUSTOM_DOMAİN, AWS_LOCATION)
-STATICFILES_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'

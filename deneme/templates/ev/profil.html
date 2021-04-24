@@ -39,29 +39,51 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <center>
-                    <div class="col-12">
-                        <a class="list-group-item list-group-item-action" href="{%url 'urun_ekle'%}">Ürün Ekle</a>
-                        <a class="list-group-item list-group-item-action" href="{%url 'profil_guncelle'%}">Profil Düzenle</a>
-                        <a class="list-group-item list-group-item-action" href="{%url 'sifredegistir'%}">Şifre Değiştir</a>
-                        <a class="list-group-item list-group-item-action" href="{%url 'cikis'%}">Çıkış</a>
-                    </div>
-                </center>
-            </div>
-        </div>
-    </div>
-</div>
-{%endif%}
-<center>
-    <div class="brand_color" style="font-size:large; ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2><a href="{%url 'giris'%}">{%if not request.user.is_authenticated%}Sisteme Giriş Yap{%else%}Profilim{%endif%}</a></h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <center>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="titlepage">
+                                            <h1><strong>Profil Sayfası</strong></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                        <div class="row">
+                            <div class=" col-md-12 ">
+                                <a class="read-more" href="{%url 'urun_ekle'%}">Ürün Ekle</a>
+                            </div>
+                            <div class=" col-md-12 ">
+                                <a class="read-more" href="{%url 'profil_guncelle'%}">Profil Düzenle</a>
+                            </div>
+                            <div class=" col-md-12 ">
+                                <a class="read-more" href="{%url 'sifredegistir'%}">Şifre Değiştir</a>
+                            </div>
+                            <div class=" col-md-12 ">
+                                <a class="read-more" href="{%url 'cikis'%}">Çıkış Yap</a>
+                            </div>
+                            <br><br><br><br>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</center> {%endblock%} {%block brand%}{%endblock%} {%block contact%} {%endblock%} {%block clients%}{%endblock%} {%block slider_section%}{% endblock%}
+    {%endif%}
+    <br><br><br>
+    <center>
+        <div class="brand_color" style="font-size:large; ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titlepage">
+                            <h2><a href="{%url 'giris'%}">{%if not request.user.is_authenticated%}Sisteme Giriş Yap{%else%}Profilim{%endif%}</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center> {%endblock%} {%block brand%}{%endblock%} {%block contact%} {%endblock%} {%block clients%}{%endblock%} {%block slider_section%}{% endblock%}
