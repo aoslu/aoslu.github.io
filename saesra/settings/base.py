@@ -13,17 +13,19 @@ import os
 from pathlib import Path
 from os import environ
 
+#'Env' in os.environ
+
 env= environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY =env('SECRET_KEY')
+#SECRET_KEY= 'j82pl1uodepr=32@ydje)2d+h0!5y)fb3h2118@oc0gotutrzx'
 
 # Application definition
 
@@ -74,6 +76,7 @@ WSGI_APPLICATION = 'saesra.wsgi.application'
 
 
 
+
 # Internationalization
 
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -103,3 +106,13 @@ MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL= '/anasayfa'
+
+
+AWS_ACCESS_KEY_ID = env('ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'akinoslus3'
+AWS_S3_CUSTOM_DOMAİN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS= {'CacheControl':'max-age=86400',}
+AWS_LOCATION = 'static'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAİN, AWS_LOCATION)
+STATICFILES_STORAGE= 'storages.backends.s3boto3.s3Boto3Storage'
