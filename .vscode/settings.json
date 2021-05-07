@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\aknos\\saesra-SaxJIM23\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Users\\aknos\\.virtualenvs\\saesra-SaxJIM23\\Scripts\\python.exe",
+    "git.ignoreLimitWarning": true,
 }

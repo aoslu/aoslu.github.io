@@ -11,20 +11,23 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
-from os import environ
+import environ
 
 #'Env' in os.environ
+#root = environ.Path(__file__)
+env = environ.Env()
 
-env= environ.Env()
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DEBUG=True
+
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =env('SECRET_KEY')
+SECRET_KEY=env('SECRET_KEY')
 #SECRET_KEY= 'j82pl1uodepr=32@ydje)2d+h0!5y)fb3h2118@oc0gotutrzx'
 
 # Application definition
@@ -39,7 +42,7 @@ INSTALLED_APPS = [
     'deneme',
     'account',
     'crispy_forms',
-    'rest_framework',
+    'storages',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,14 +71,7 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'saesra.wsgi.application'
-
-
-
-
-
-
 
 # Internationalization
 
@@ -95,9 +91,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS= [
-    BASE_DIR / "static"
-]
+
+#if DEBUG:
+#STATICFILES_DIRS = [
+#    BASE_DIR / "deneme/static"
+#]
+#else:
+#    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 AUTH_USER_MODEL='account.CustomUserModel'
 
 MEDIA_URL = '/media/'
@@ -107,12 +108,17 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL= '/anasayfa'
 
-
 AWS_ACCESS_KEY_ID = env('ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'akinoslus3'
-AWS_S3_CUSTOM_DOMAİN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS= {'CacheControl':'max-age=86400',}
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS= {
+    'CacheControl':'max-age=86400',
+}
 AWS_LOCATION = 'static'
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAİN, AWS_LOCATION)
-STATICFILES_STORAGE= 'storages.backends.s3boto3.s3Boto3Storage'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+
+

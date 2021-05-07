@@ -16,7 +16,7 @@ def anasayfa(request):
     if sorgu:  #SearchBox Kutusu İşlev Kodu
         urunler = urunler.filter(
             Q(baslik__icontains=sorgu) |
-            Q(aciklama__icontains=sorgu)
+            Q(aciklama__icontains=sorgu) #search kısmı keyword veya harfe göre arama
         ).distinct()
 
     sayfa = request.GET.get('sayfa')
@@ -26,10 +26,10 @@ def anasayfa(request):
         form= MessageForm(request.POST)
         if form.is_valid():
             form.save()
-            form = MessageForm() #MessageForm
+            form = MessageForm() #MessageForm Kullanıcıların mesaj göndermesini sağlayan yapı
     else:
         form = MessageForm()
-    return render(request, "ev/anasayfa.html", context={'alt_kategoriler':alt_kategoriler, 'urunler':paginator.get_page(sayfa), 'form':form})
+    return render(request, "ev/anasayfa.html", context={'alt_kategoriler':alt_kategoriler, 'form':form,'urunler':paginator.get_page(sayfa)})
 
 class UrunEkleCreateView(LoginRequiredMixin, CreateView):
     login_url=reverse_lazy('giris')
