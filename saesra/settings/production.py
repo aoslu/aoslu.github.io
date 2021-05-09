@@ -29,17 +29,17 @@ AUTH_PASSWORD_VALIDATORS = [
 DATABASES={
    'default':{
       'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME': env('DB_NAME'),
-      'USER': env('DB_USER'),
-      'PASSWORD': env('DB_PASSWORD'),
+      'NAME': env.str('DB_NAME'),
+      'USER': env.str('DB_USER'),
+      'PASSWORD': env.str('DB_PASSWORD'),
       'HOST': 'localhost',
       'PORT': '5432',
    }
 }
 
 
-AWS_ACCESS_KEY_ID = env('ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = env.str('ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env.str('SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'akinoslus3'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS= {
