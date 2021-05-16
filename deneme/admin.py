@@ -1,5 +1,5 @@
 from django.contrib import admin
-from deneme.models import KategoriModel, ProductModel, AltKategoriModel, MessageModel
+from deneme.models import KategoriModel, ProductModel, AltKategoriModel, MessageModel, Customers
 from deneme.models.urun_yorum import YorumModel
 # Register your models here.
 
@@ -23,3 +23,8 @@ class YorumAdmin(admin.ModelAdmin):
     search_fields= ('yazan__username',)
 
 admin.site.register(YorumModel, YorumAdmin)
+
+class CustomersAdmin(admin.ModelAdmin):
+    list_display= ('name', 'surname', 'comment', 'puan')
+    search_fields = ('name',)
+admin.site.register(Customers, CustomersAdmin)

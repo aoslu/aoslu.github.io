@@ -1,5 +1,5 @@
 from django.shortcuts import render #,get_object_or_404
-from deneme.models import AltKategoriModel, ProductModel #,YorumModel
+from deneme.models import AltKategoriModel, ProductModel, Customers #,YorumModel
 from django.core.paginator import Paginator
 from deneme.forms import MessageForm, YorumModelForm
 # ProductForm,
@@ -13,6 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 #logger= logging.getLogger('goruntulenme')
 
 def anasayfa(request):
+    customers= Customers.objects.all()
     sorgu = request.GET.get('sorgu')
     alt_kategoriler= AltKategoriModel.objects.all()
     urunler= ProductModel.objects.all()
@@ -32,7 +33,8 @@ def anasayfa(request):
             form = MessageForm() #MessageForm Kullanıcıların mesaj göndermesini sağlayan yapı
     else:
         form = MessageForm()
-    return render(request, "ev/anasayfa.html", context={'alt_kategoriler':alt_kategoriler, 'form':form,'urunler':paginator.get_page(sayfa)})
+
+    return render(request, "ev/anasayfa.html", context={'alt_kategoriler':alt_kategoriler, 'customers':customers,'form':form,'urunler':paginator.get_page(sayfa)})
 
 class UrunEkleCreateView(LoginRequiredMixin, CreateView):
     login_url=reverse_lazy('giris')
