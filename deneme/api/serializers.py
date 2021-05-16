@@ -1,38 +1,56 @@
 from rest_framework import serializers
-from deneme.models import Customers
+from deneme.models import ProductModel, KategoriModel, Customers
 
-class CustomersSerializer(serializers.Serializer):
-    id= serializers.IntegerField(read_only=True)
-    name = serializers.CharField()
-    surname= serializers.CharField()
-    puan= serializers.IntegerField()
-    comment= serializers.CharField()
+class CustomersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customers
+        fields= '__all__'
+        read_only_fields= ['id',]
 
-    def create(self, validated_data):
-        print(validated_data)
-        return Customers.objects.create(**validated_data)
+class ProductModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductModel
+        fields = '__all__'
+        read_only_fields= ['id',]
 
-    def update(self, instance, validated_data):
-        instance.name= validated_data.get('name', instance.name)
-        instance.surname= validated_data.get('surname', instance.surname)
-        instance.puan= validated_data.get('puan', instance.puan)
-        instance.comment= validated_data.get('comment', instance.comment)
-        instance.save()
-        return instance
+class KategoriModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = KategoriModel
+        fields = '__all__'
+        read_only_fields= ['id',]
+#standart serializer...........................................
+# class CustomersDefaultSerializer(serializers.Serializer):
+#     id= serializers.IntegerField(read_only=True)
+#     name = serializers.CharField()
+#     surname= serializers.CharField()
+#     puan= serializers.IntegerField()
+#     comment= serializers.CharField()
 
-#VALİDATİON...
-    def validate(self, data):
-        if data['name'] == data['surname']:
-            raise serializers.ValidationError(
-                'Ad ve Soyad Aynı Olamaz'
-            )
-        return data
-    def validate_name(self, value):
-        if len(value) < 5 :
-            raise serializers.ValidationError(
-                f'İsminiz 5 haneden küçük olamaz. Siz {len(value)} karakter girdiniz'
-            )
-            return value
+#     def create(self, validated_data):
+#         print(validated_data)
+#         return Customers.objects.create(**validated_data)
+
+#     def update(self, instance, validated_data):
+#         instance.name= validated_data.get('name', instance.name)
+#         instance.surname= validated_data.get('surname', instance.surname)
+#         instance.puan= validated_data.get('puan', instance.puan)
+#         instance.comment= validated_data.get('comment', instance.comment)
+#         instance.save()
+#         return instance
+
+# #VALİDATİON...
+#     def validate(self, data):
+#         if data['name'] == data['surname']:
+#             raise serializers.ValidationError(
+#                 'Ad ve Soyad Aynı Olamaz'
+#             )
+#         return data
+#     def validate_name(self, value):
+#         if len(value) < 5 :
+#             raise serializers.ValidationError(
+#                 f'İsminiz 5 haneden küçük olamaz. Siz {len(value)} karakter girdiniz'
+#             )
+#         return value
 #class ProductModelSerializer(serializers.Serializer):
 #    id= serializers.IntegerField(read_only=True)
 #    foto_ekle= serializers.ImageField()
