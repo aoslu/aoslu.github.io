@@ -2,9 +2,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from deneme.models import Customers, ProductModel, KategoriModel
-from deneme.api.serializers import CustomersSerializer, ProductModelSerializer, KategoriModelSerializer
+from deneme.api.serializers import CustomersSerializer, ProductModelSerializer, KategoriModelSerializer, CustomUserModelSerializer
 from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
+from account.models import CustomUserModel
 
 
 class CustomerListCreateAPIView(APIView):
@@ -36,8 +37,8 @@ class CustomerListCreateAPIView(APIView):
 
 class CustomerDetailAPIView(APIView):
     def get_object(self, pk):
-        customer_instance= get_object_or_404(Customers, pk=pk)
-        return customer_instance
+        xd= get_object_or_404(Customers, pk=pk)
+        return xd
 
     def get(self, request, pk):
         customer = self.get_object(pk=pk)
@@ -70,18 +71,18 @@ class ProductModelListCreateAPIView(APIView):
         return Response(status= status.HTTP_400_BAD_REQUEST)
 
 class ProductModelDetailAPIView(APIView):
-    # def get_object(self, pk):
-    #     products= get_object_or_404(Customers, pk=pk)
-    #     return customer_instance
+    def get_object(self, pk):
+         products= get_object_or_404(ProductModel, pk=pk)
+         return products
 
     def get(self, request, pk):
-        product = self.get_object(pk=pk)
-        serializer = ProductModelSerializer(product)
+        products = self.get_object(pk=pk)
+        serializer = ProductModelSerializer(products)
         return Response(serializer.data)
 
     def put(self, request,pk):
-        product= self.get_object(pk=pk)
-        serializer =ProductModelSerializer(product, data=request.data)
+        products= self.get_object(pk=pk)
+        serializer =ProductModelSerializer(products, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -106,9 +107,9 @@ class KategoriModelListCreateAPIView(APIView):
         return Response(status= status.HTTP_400_BAD_REQUEST)
 
 class KategoriModelDetailAPIView(APIView):
-    # def get_object(self, pk):
-    #     products= get_object_or_404(Customers, pk=pk)
-    #     return customer_instance
+    def get_object(self, pk):
+         products= get_object_or_404(KategoriModel, pk=pk)
+         return products
 
     def get(self, request, pk):
         kategori = self.get_object(pk=pk)
@@ -128,6 +129,40 @@ class KategoriModelDetailAPIView(APIView):
         kategori.delete()
         return Response(status= status.HTTP_204_NO_CONTENT)
 
+class CustomUserModelListCreateAPIView(APIView):
+    def get(self, request):
+        user= CustomUserModel.objects.filter()
+        serializer = CustomUserModelSerializer(user, many=True, context={'request':request})  #Context ve request serializerdaki hyperlinkleme ile bütünleşik aynı zamanda 
+        return Response(serializer.data)
+    def post(self, request):
+        serializer =KategoriModelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status= status.HTTP_201_CREATED)
+        return Response(status= status.HTTP_400_BAD_REQUEST)
+
+class CustomUserModelDetailAPIView(APIView):
+    def get_object(self, pk):
+         user= get_object_or_404(CustomUserModel, pk=pk)
+         return user
+
+    def get(self, request, pk):
+        user = self.get_object(pk=pk)
+        serializer = KategoriModelSerializer(user)
+        return Response(serializer.data)
+
+    def put(self, request,pk):
+        user= self.get_object(pk=pk)
+        serializer =KategoriModelSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        user = self.get_object(pk=pk)
+        user.delete()
+        return Response(status= status.HTTP_204_NO_CONTENT)
 #FUNCTİON BASED VİEWS
 
 # @api_view(['GET','PUT','DELETE'])

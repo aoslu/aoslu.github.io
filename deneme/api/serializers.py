@@ -1,23 +1,92 @@
 from rest_framework import serializers
 from deneme.models import ProductModel, KategoriModel, Customers
-
-class CustomersSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Customers
-        fields= '__all__'
-        read_only_fields= ['id',]
+from account.models import CustomUserModel
 
 class ProductModelSerializer(serializers.ModelSerializer):
+
+#    yazar= serializers.StringRelatedField()    # Yazar id leri yerine string tipindeki isimleri-karakterleri json içine yazdırır
+    # yazar = CustomUserModelSerializer()
     class Meta:
         model = ProductModel
         fields = '__all__'
-        read_only_fields= ['id',]
+        read_only_fields= ['id','kategoriler','olusturulma_tarihi']
+
+    def validate(self, data):
+        if data['name'] == data['surname']:
+            raise serializers.ValidationError(
+                'Ad ve Soyad Aynı Olamaz'
+             )
+        return data
+    def validate_name(self, value):
+        if len(value) < 5 :
+             raise serializers.ValidationError(
+                f'İsminiz 5 haneden küçük olamaz. Siz {len(value)} karakter girdiniz'
+             )
+        return value
 
 class KategoriModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = KategoriModel
         fields = '__all__'
         read_only_fields= ['id',]
+
+    def validate(self, data):
+        if data['name'] == data['surname']:
+            raise serializers.ValidationError(
+                'Ad ve Soyad Aynı Olamaz'
+             )
+        return data
+
+    def validate_name(self, value):
+        if len(value) < 5 :
+             raise serializers.ValidationError(
+                f'İsminiz 5 haneden küçük olamaz. Siz {len(value)} karakter girdiniz'
+             )
+        return value
+
+class CustomUserModelSerializer(serializers.ModelSerializer):
+    # urunler = ProductModelSerializer(many=True, read_only=True)
+    urunler = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='urun-listesi-detay',
+    )
+    class Meta:
+        model = CustomUserModel
+        fields= ["username","email","password","urunler"]
+        read_only_fields= ['id',]
+
+    def validate(self, data):
+        if data['name'] == data['surname']:
+            raise serializers.ValidationError(
+                'Ad ve Soyad Aynı Olamaz'
+             )
+        return data
+    def validate_name(self, value):
+        if len(value) < 5 :
+             raise serializers.ValidationError(
+                f'İsminiz 5 haneden küçük olamaz. Siz {len(value)} karakter girdiniz'
+             )
+        return value
+class CustomersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customers
+        fields= '__all__'
+        read_only_fields= ['id',]
+
+    def validate(self, data):
+         if data['name'] == data['surname']:
+             raise serializers.ValidationError(
+                 'Ad ve Soyad Aynı Olamaz'
+              )
+         return data
+    def validate_name(self, value):
+         if len(value) < 5 :
+             raise serializers.ValidationError(
+                 f'İsminiz 5 haneden küçük olamaz. Siz {len(value)} karakter girdiniz'
+              )
+         return value
+
 #standart serializer...........................................
 # class CustomersDefaultSerializer(serializers.Serializer):
 #     id= serializers.IntegerField(read_only=True)
@@ -38,19 +107,6 @@ class KategoriModelSerializer(serializers.ModelSerializer):
 #         instance.save()
 #         return instance
 
-# #VALİDATİON...
-#     def validate(self, data):
-#         if data['name'] == data['surname']:
-#             raise serializers.ValidationError(
-#                 'Ad ve Soyad Aynı Olamaz'
-#             )
-#         return data
-#     def validate_name(self, value):
-#         if len(value) < 5 :
-#             raise serializers.ValidationError(
-#                 f'İsminiz 5 haneden küçük olamaz. Siz {len(value)} karakter girdiniz'
-#             )
-#         return value
 #class ProductModelSerializer(serializers.Serializer):
 #    id= serializers.IntegerField(read_only=True)
 #    foto_ekle= serializers.ImageField()
@@ -71,7 +127,7 @@ class KategoriModelSerializer(serializers.ModelSerializer):
 #        instance.baslik = validated_data.get('baslik', instance.baslik)
 #        instance.aciklama= validated_data.get('aciklama', instance.aciklama)
 #        instance.fiyat_ekle= validated_data.get('fiyat_ekle', instance.fiyat_ekle)
-#       instance.olusturulma_tarihi= validated_data.get('olusturulma_tarihi', instance.olusturulma_tarihi)
+#        instance.olusturulma_tarihi= validated_data.get('olusturulma_tarihi', instance.olusturulma_tarihi)
 #        instance.kategoriler= validated_data.get('kategoriler', instance.kategoriler)
 #        instance.save()
 #        return instance

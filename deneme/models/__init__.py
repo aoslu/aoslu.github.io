@@ -5,3 +5,7 @@ from .mesaj import MessageModel
 from account.models import CustomUserModel
 from .urun_yorum import YorumModel
 from .customers import Customers
+#from .advertise import AdvertiseModel
+from .brand import BrandModel
+#from .type import TypeModel
+#from .property import PropertyModel

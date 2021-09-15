@@ -21,10 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DEBUG=True
-
+ALLOWED_HOSTS = ['localhost','18.185.92.19','localhost:8000']
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY=env('SECRET_KEY')
@@ -75,6 +76,31 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = 'saesra.wsgi.application'
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME': env('DB_NAME'),
+      'USER': env('DB_USER'),
+      'PASSWORD': env('DB_PASSWORD'),
+      'HOST': 'localhost',
+      'PORT': '5432',
+   }
+}
 # Internationalization
 
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

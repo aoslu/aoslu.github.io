@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==3.1.6"
+django = "==3.1.5"
 django-environ = "*"
 boto3 = "*"
 django-storages = "*"
@@ -12,6 +12,7 @@ environ = "*"
 django-crispy-forms = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+django-extensions = "*"
 
 [dev-packages]
 
